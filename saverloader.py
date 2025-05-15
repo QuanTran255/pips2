@@ -53,7 +53,7 @@ def load(ckpt_dir, model, optimizer=None, scheduler=None, step=0, model_name='mo
                 # 3. load the new state dict
                 model.load_state_dict(model_dict, strict=False)
             else:
-                checkpoint = torch.load(path)
+                checkpoint = torch.load(path, weight_only=False)
                 model.load_state_dict(checkpoint['model_state_dict'], strict=False)
                 
             if optimizer is not None:
