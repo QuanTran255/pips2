@@ -411,15 +411,16 @@ class CorrBlock:
             self.corrs_pyramid.append(corrs)
 
 class Pips(nn.Module):
-    def __init__(self, stride=8):
+    def __init__(self, stride=8, radius=3):
         super(Pips, self).__init__()
 
         self.stride = stride
+        self.corr_radius = radius
 
         self.hidden_dim = hdim = 256
         self.latent_dim = latent_dim = 128
         self.corr_levels = 4
-        self.corr_radius = 3
+        
         
         self.fnet = BasicEncoder(output_dim=self.latent_dim, norm_fn='instance', dropout=0, stride=stride)
         self.delta_block = DeltaBlock(hidden_dim=self.hidden_dim, corr_levels=self.corr_levels, corr_radius=self.corr_radius)
